@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.clearfix:after {
+			content: "";
+			display: block;
+			clear: both;
+		}
+
+		body {
+			margin: 0;
+			background: #000;
+		}
+
+		#wrap {
+			position: relative;
+			margin: 30px auto;
+			width: 290px;
+			height: 594px;
+			background: #fff url("img/iphone.gif") no-repeat;
+		}
+
+		#list {
+			overflow: auto;
+			margin: 0;
+			padding: 12px 0 0 11px;
+			list-style: none;
+			position: absolute;
+			left: 26px;
+			top: 86px;
+			width: 226px;
+			height: 359px;
+		}
+
+		#list li {
+			width: 224px;
+			min-height: 28px;
+			margin-bottom: 10px;
+		}
+
+		#list li .text {
+			padding: 3px;
+			max-width: 186px;
+			line-height: 20px;
+		}
+
+		#list .p1 span {
+			float: right;
+			margin-left: 5px;
+		}
+
+		#list .p1 .text {
+			float: right;
+			background: #21c618;
+		}
+
+		#list .p2 span {
+			float: left;
+			margin-right: 5px;
+		}
+
+		#list .p2 .text {
+			float: left;
+			background: #ccc;
+		}
+
+		#box {
+			position: absolute;
+			left: 26px;
+			bottom: 87px;
+			width: 237px;
+			height: 50px;
+		}
+
+		#changePerson {
+			display: inline-block;
+			position: absolute;
+			left: 4px;
+			top: 8px;
+			width: 30px;
+			height: 34px;
+			line-height: 34px;
+			border: 1px solid #ded6e7;
+			border-radius: 5px;
+			background: #fff;
+			cursor: pointer;
+		}
+
+		#changePerson img {
+			position: absolute;
+			left: 2px;
+			top: 4px;
+		}
+
+		#text {
+			position: absolute;
+			top: 8px;
+			left: 40px;
+			width: 140px;
+			height: 34px;
+			border: 1px solid #ded6e7;
+			border-radius: 5px;
+			font-size: 16px;
+			background: #fff;
+			outline: none;
+		}
+
+		#btn {
+			position: absolute;
+			top: 8px;
+			right: 0;
+			width: 54px;
+			height: 36px;
+			line-height: 36px;
+			font-size: 20px;
+			font-weight: 400;
+			font-family: "微软雅黑";
+			text-align: center;
+			text-decoration: none;
+			color: #a0a0a4;
+		}
+
+	</style>
+	<script>
+		/*
+			需求: 点击头像，然后点击发送实现不同用户发言。
+
+		*/
+		window.onload = function (){
+			var list = document.getElementById("list");
+			var box = document.getElementById("box");
+			var cPer = document.getElementById("changePerson");
+			var pic = document.getElementById("pic");
+			var text = document.getElementById("text");
+			var btn = document.getElementById("btn");
+			var n = 1,len = 4;
+
+			// 点击头像
+			cPer.onclick = function (){
+				n++;
+				if( n > len ){
+					n = 1;
+				}
+				pic.src="img/"+n+".gif";
+			}
+
+			// 点击发送
+			btn.onclick = function (){
+
+				var val = text.value;
+				// n = 1时为当前人，不等于1时为别人
+				if( n == 1 ){
+					list.innerHTML += '<li class="p1 clearfix"><span><img src="img/'+n+'.gif" alt=""></span><div class="text">'+ val +'</div></li>';
+				} else {
+					list.innerHTML += '<li class="p2 clearfix"><span><img src="img/'+n+'.gif" alt=""></span><div class="text">'+ val +'</div></li>';
+				}
+
+			}    
+		}
+	</script>
+</head<!-- 
+			需求: 点击头像切换用户发言
+
+
+ -->
+<body>
+	<div id="wrap">
+		<ul id="list">
+			<!-- <li class="p1 clearfix">
+				<span>
+					<img src="img/1.gif" alt="">
+				</span>
+				<div class="text"></div>
+			</li>
+			<li class="p2 clearfix">
+				<span>
+					<img src="img/2.gif" alt="">
+				</span>
+				<div class="text"></div>
+			</li>
+			-->
+		</ul>
+		<div id="box">
+			<span id="changePerson">
+				<img src="img/1.gif" id="pic" alt="">
+			</span>
+			<input type="text" id="text" value="" />
+			<a href="javascript:void(0)" id="btn">发送</a>
+		</div>
+	</div>
+</body>
+</html>
